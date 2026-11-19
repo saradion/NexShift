@@ -58,10 +58,10 @@ smartshift/
     ├── accounts/          users, JWT login, captcha, password rules
     ├── department/        departments, skills, shift types, holidays, work rules
     ├── staff/             employees, skills per employee, leave requests
-    ├── scheduling/        schedules, demand rules, assignments, shortages
-    ├── shift_requests/    objections, change requests, swaps
+    ├── schedule/        schedules, demand rules, assignments, shortages
+    ├── shiftreq/    objections, change requests, swaps
     ├── solver/            OR-Tools engine and generate endpoint
-    ├── notifications/     in-app notifications
+    ├── notif/     in-app notifications
     └── audit/             audit log
 ```
 
@@ -102,13 +102,13 @@ Open `https://localhost/api/v1/docs/`.
 
 1. Log in: `GET /api/accounts/captcha/`, then `POST /api/accounts/token/` with username, password, `captcha_key` and `captcha_value`.
 2. Define departments, shift types and demand rules, and add employees.
-3. Create a schedule: `POST /api/scheduling/schedules/`.
+3. Create a schedule: `POST /api/schedule/schedules/`.
 4. Generate it: `POST /api/solver/schedules/{id}/generate/`.
-5. Review assignments and shortages, then publish: `POST /api/scheduling/schedules/{id}/publish/`.
+5. Review assignments and shortages, then publish: `POST /api/schedule/schedules/{id}/publish/`.
 
 ## Main API endpoints
 
-All endpoints are under `/api/v1/`.
+All endpoints are under `/api/`.
 
 | Area | Endpoint |
 |---|---|
@@ -116,10 +116,10 @@ All endpoints are under `/api/v1/`.
 | Users (admin) | `accounts/users/` |
 | Organization | `department/departments/`, `skills/`, `shift-types/`, `holidays/`, `work-rules/` |
 | Employees | `staff/employees/`, `staff/employees/me/`, `staff/leave-requests/` |
-| Scheduling | `scheduling/schedules/` (`publish`, `archive`, `duplicate`, `compare`), `assignments/` (`my`), `demand-rules/`, `shortages/` |
+| Scheduling | `schedule/schedules/` (`publish`, `archive`, `duplicate`, `compare`), `assignments/` (`my`), `demand-rules/`, `shortages/` |
 | Requests | `requests/` (`accept`, `decline`, `approve`, `reject`, `cancel`) |
 | Solver | `solver/schedules/{id}/generate/` |
-| Notifications | `notifications/` (`unread-count`, `mark-read`, `mark-all-read`) |
+| Notifications | `notif/` (`unread-count`, `mark-read`, `mark-all-read`) |
 | Audit (admin) | `audit/logs/` |
 
 ## Roadmap
@@ -202,10 +202,10 @@ smartshift/
     ├── accounts/          کاربران، ورود JWT، کپچا، قوانین رمز
     ├── department/        بخش‌ها، مهارت‌ها، انواع شیفت، تعطیلات، قوانین کاری
     ├── staff/             کارکنان، مهارت‌ها، درخواست مرخصی
-    ├── scheduling/        برنامه‌ها، نیازمندی‌ها، شیفت‌ها، کمبودها
-    ├── shift_requests/    اعتراض، تغییر، جابه‌جایی
+    ├── schedule/        برنامه‌ها، نیازمندی‌ها، شیفت‌ها، کمبودها
+    ├── shiftreq/    اعتراض، تغییر، جابه‌جایی
     ├── solver/            موتور OR-Tools و مسیر تولید برنامه
-    ├── notifications/     اعلان‌ها
+    ├── notif/     اعلان‌ها
     └── audit/             گزارش حسابرسی
 ```
 
@@ -260,9 +260,9 @@ docker compose exec web python manage.py seed_demo
 
 ۱. ورود: ابتدا `GET /api/accounts/captcha/` و بعد `POST /api/accounts/token/` با نام کاربری، رمز، `captcha_key` و `captcha_value`.
 ۲. بخش‌ها، انواع شیفت و قوانین نیازمندی را تعریف کنید و کارکنان را اضافه کنید.
-۳. برنامه بسازید: `POST /api/scheduling/schedules/`.
+۳. برنامه بسازید: `POST /api/schedule/schedules/`.
 ۴. تولید خودکار: `POST /api/solver/schedules/{id}/generate/`.
-۵. شیفت‌ها و کمبودها را بررسی کنید و منتشر کنید: `POST /api/scheduling/schedules/{id}/publish/`.
+۵. شیفت‌ها و کمبودها را بررسی کنید و منتشر کنید: `POST /api/schedule/schedules/{id}/publish/`.
 
 ## مسیرهای اصلی API
 
@@ -274,10 +274,10 @@ docker compose exec web python manage.py seed_demo
 | کاربران (مدیر) | `accounts/users/` |
 | سازمان | `department/departments/`، `skills/`، `shift-types/`، `holidays/`، `work-rules/` |
 | کارکنان | `staff/employees/`، `staff/employees/me/`، `staff/leave-requests/` |
-| برنامه‌ریزی | `scheduling/schedules/` (`publish`، `archive`، `duplicate`، `compare`)، `assignments/` (`my`)، `demand-rules/`، `shortages/` |
+| برنامه‌ریزی | `schedule/schedules/` (`publish`، `archive`، `duplicate`، `compare`)، `assignments/` (`my`)، `demand-rules/`، `shortages/` |
 | درخواست‌ها | `requests/` (`accept`، `decline`، `approve`، `reject`، `cancel`) |
 | حل‌کننده | `solver/schedules/{id}/generate/` |
-| اعلان‌ها | `notifications/` (`unread-count`، `mark-read`، `mark-all-read`) |
+| اعلان‌ها | `notif/` (`unread-count`، `mark-read`، `mark-all-read`) |
 | حسابرسی (مدیر) | `audit/logs/` |
 
 ## نقشه‌ی راه
